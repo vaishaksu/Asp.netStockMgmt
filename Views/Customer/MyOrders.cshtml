@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StockManagement.Controllers;
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "MyOrder";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+@using StockManagement.Models
+@model List<Order>
+
+
+<div class="">
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="myorder-container mt-5">
+        <div class="myorder-container-wrapper">
+            <h4 class="grey-color bg-white row p-3 justify-content-center">MY ORDERS</h4>
+            @foreach (Order order in ViewBag.orders)
+            {
+                @foreach (Item item in JsonConvert.DeserializeObject<List<Item>>(order.items))
+                {
+                    <div class="row mt-3  bg-white pl-2 pt-3 pb-3 pr-2">
+                        <div class="col-2 pr-0 pl-1">
+                            <img src="/img/@item.item_image" width="75" class="myOrders-image" />
+                        </div>
+                        <div class="col-8">
+                            <div>
+                                <h5 class="details-name grey-color"> @item.item_name </h5>
+                            </div>
+                            <div>
+                                <p>Seller: @item.seller_name</p>
+                            </div>
+                            <div>
+                                <h5 class="details-price green-color"> @item.price</h5>
+                            </div>
+                            <div class="pb-2">
+                                <b>Order Status: </b>
+                                <span class="green-color">In Progress</span>
+                            </div>
+                            <div>
+                                <b>Tracking Id: </b>
+                                <span>
+                                    @order.tracking_number
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

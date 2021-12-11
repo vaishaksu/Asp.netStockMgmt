@@ -1,0 +1,125 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StockManagement.Controllers;
+
+@{
+    ViewData["Title"] = "MyCart";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+
+}
+
+
+@{
+    var  myCart = Context.Session.GetObject<List<Item>>("MyCart");
+    double price = 0.0;
+    foreach (Item item in myCart)
+    {
+        price += item.price;
+    }
+    int discountedAmount = 200;
+    double totalAmount = price - (double)discountedAmount;
+}
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="mycart-container row mt-4">
+        <div class="col-7 mr-2 pl-0 pr-0 bg-white">
+            <div class="pl-3 mt-3">
+                <h5 class="grey-color pb-2">MY CART(myCart.Count)</h5>
+                @foreach (Item item in myCart)
+                {
+                    <div class="my-cart-items pb-3">
+                        <div class="row">
+                            <div class="col-2 pr-0">
+                                <img src="/img/@item.item_image" class="mycart-image" />
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <p class="details-name grey-color"><b> @item.item_name</b> </p>
+                                </div>
+                                <div>
+                                    <p><b>Seller: </b>@item.seller_name</p>
+                                </div>
+                                <div>
+                                    <h5 class="details-price green-color">
+                                        @item.price.ToString("c")
+                                    </h5>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                <div class="delivered-date">
+                                    Delivered by @DateTime.Now.AddDays(7).ToString("d")  | <span class="green-color">Free <span class="strike-through">$40</span></span>
+                                </div>
+                                <div>
+                                    <span class="text-size">7 Days Replacement Policy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <div class="d-flex">
+                                <div class="d-flex">
+                                    <button class="btn btn-light rounded-circle decrement-increment-btn" type="submit" name="decrement"> <b>-</b> </button>
+                                    <p class="quantity-p"> @item.quantity </p>
+                                    <button class="btn btn-light increment-btn rounded-circle decrement-increment-btn" type="submit" name="increment"> <b>+</b> </button>
+                                </div>
+                                <div class="ml-2">
+                                    @using (Html.BeginForm("RemoveCartItem", "Customer", null, FormMethod.Post))
+                                    {
+                                        <button class="btn remove-light-bg" asp-action="RemoveCartItem" asp-controller="Customer" asp-route-id="@item.item_id" type="submit" name="removeCart"><i class="fas fa-trash color-red"></i><span class="color-red"> REMOVE</span> </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                }
+
+
+
+            </div>
+            <div>
+                <div class="place-order-div d-flex justify-content-between">
+                    <a asp-action="Index" asp-controller="Item" class="btn btn-info"><b>BACK TO MENU</b></a>
+
+                    <a asp-action="Address" asp-controller="Customer" class="btn btn-warning"><b>PLACE ORDER</b></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 ml-2 bg-white  ">
+            <div class="pt-3 pb-3">
+                <h5 class="grey-color">PRICE DETAILS</h5>
+                <hr />
+                <div class="price-complete-info">
+                    <div class="d-flex justify-content-between mt-2">
+                        <div>Price (@myCart.Count Item)</div>
+                        <div>@price.ToString("c")</div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div>Discount (1 Item)</div>
+                        <div>@discountedAmount.ToString("c")</div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div>Delivery Charge (1 Item)</div>
+                        <div class="green-color">FREE</div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between mt-2">
+                        <div><b>Total Amount</b></div>
+                        <div><b>@totalAmount.ToString("c") </b></div>
+                    </div>
+                    <hr />
+                    <div class="green-color"><b>You will save @discountedAmount.ToString("c")</b></div>
+                </div>
+            </div>
+            <div class="safety-sign pb-2">
+                <span class="grey-color">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="pl-1">Safe and Secure Payments.Easy returns.100% Authentic products.</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

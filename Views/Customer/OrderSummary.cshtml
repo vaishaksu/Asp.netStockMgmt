@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StockManagement.Controllers;
+
+@{
+    ViewData["Title"] = "OrderSummary";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+@{
+    double price = 0.0;
+    List<Item> items = Context.Session.GetObject<List<Item>>("MyCart");
+
+    foreach (Item item in items)
+    {
+        price += item.price;
+    }
+    int discountedAmount = 200;
+    double totalAmount = price - (double)discountedAmount;
+}
+
+
+<div class="bg-white p-3 mt-5">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+    </div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="pt-3">
+        <h5 class="grey-color text-center pb-3">ORDER SUMMARY</h5>
+        <div class="price-complete-info">
+            <div class="d-flex justify-content-between mt-2">
+                <div>Price (@items.Count Item)</div>
+                <div>@price.ToString("c")</div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+                <div>Discount (@items.Count Item)</div>
+                <div>@discountedAmount.ToString("c")</div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+                <div>Delivery Charge (@items.Count Item)</div>
+                <div class="green-color">FREE</div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between mt-2">
+                <div><b>Total Amount</b></div>
+                <div><b>@totalAmount.ToString("c")</b></div>
+            </div>
+            <hr />
+            <div class="green-color"><b>You will save @discountedAmount.ToString("c")</b></div>
+        </div>
+        <div class="pt-3 d-flex justify-content-between">
+            <a asp-action="Address" asp-controller="Customer" class="btn btn-primary">PREVIOUS</a>
+            <a asp-action="Confirmation" asp-controller="Customer" class="btn btn-primary">CONTINUE</a>
+        </div>
+    </div>
+</div>
+

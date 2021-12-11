@@ -1,0 +1,71 @@
+﻿@model StockManagement.Models.Item
+
+@{
+    ViewData["Title"] = "ModifyItem";
+    Layout = "~/Views/Shared/_AdminHeader.cshtml";
+}
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Admin.css" type="text/css" />
+    <div class="add-item-container bg-white p-3 mt-5">
+        <h4 class="grey-color text-center">ModifyItem</h4>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <form asp-action="ModifyItem">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <img id="output" class="img-call" src="~/img/avatar.png" width="150" height="150">
+                        <label for="customFile" class="custom-file-upload btn btn-primary" name="profile_image" onchange="loadFile(event)"><i class="fas fa-upload"></i>  Upload your picture</label>
+                        <input type="file" class="custom-file-input" id="customFile" name="profile_image" accept="image/*" onchange="loadFile(event)">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="item_name" class="control-label"> Item Name</label>
+                        <input asp-for="item_name" class="form-control" />
+                        <span asp-validation-for="item_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="seller_name" class="control-label">Seller Name</label>
+                        <input asp-for="seller_name" class="form-control" />
+                        <span asp-validation-for="seller_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="price" class="control-label">Price</label>
+                        <input asp-for="price" class="form-control" type="number" />
+                        <span asp-validation-for="price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="quantity" class="control-label">Quantity</label>
+                        <input asp-for="quantity" class="form-control" type="number" />
+                        <span asp-validation-for="quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label asp-for="in_stock" class="form-check-label">
+                            @{
+                                if (Model.in_stock == true)
+                                {
+                                    <input class="form-check-input" name="in_stock" type="checkbox" checked="checked" />
+                                } else
+                                {
+                                    <input class="form-check-input" name="in_stock" type="checkbox" />
+                                }
+                            }
+                            @*<input class="form-check-input" asp-for="in_stock" /> @Html.DisplayNameFor(model => model.in_stock)*@
+                            In Stock
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-link">Back to List</a>
+        </div>
+    </div>
+</div>
+

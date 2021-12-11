@@ -1,0 +1,64 @@
+﻿@model StockManagement.Models.Item
+
+@{
+    ViewData["Title"] = "DeliveredItem";
+    Layout = "~/Views/Shared/_AdminHeader.cshtml";
+}
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Admin.css" type="text/css" />
+    <div class="add-item-container bg-white p-3 mt-5">
+        <h4 class="grey-color text-center">Are you sure you wantmark this item Delivered?</h4>
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @*@Html.DisplayNameFor(model => model.item_name)*@
+                    Item Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.item_name)
+                </dd>
+                <dt class="col-sm-2">
+                    Item Description
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.item_description)
+                </dd>
+                <dt class="col-sm-2">
+                    @*@Html.DisplayNameFor(model => model.seller_name)*@
+                    Seller Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.seller_name)
+                </dd>
+                <dt class="col-sm-2">
+                    @*@Html.DisplayNameFor(model => model.price)*@
+                    Price
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.price)
+                </dd>
+                <dt class="col-sm-2">
+                    @*@Html.DisplayNameFor(model => model.quantity)*@
+                    Quantity
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.quantity)
+                </dd>
+                <dt class="col-sm-2">
+                    @*@Html.DisplayNameFor(model => model.in_stock)*@
+                    In Stock
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.in_stock)
+                </dd>
+            </dl>
+
+            <form asp-action="DeliveredItem">
+                <input type="submit" value="Delivered" class="btn btn-success" />
+                <a asp-action="ModifyUnProcessedOrder" class="btn btn-primary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

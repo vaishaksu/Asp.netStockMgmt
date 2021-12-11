@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StockManagement.Controllers;
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "ModifyUnProcessedOrder";
+    Layout = "~/Views/Shared/_AdminHeader.cshtml";
+}
+
+@using StockManagement.Models
+@model dynamic
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Admin.css" type="text/css" />
+    <div class="admin-container">
+        <div class="admin-container-wrapper pt-5">
+            <div class="row justify-content-end row mb-3">
+                <a asp-action="Index" asp-controller="Admin" class="btn btn-primary">BACK TO MAIN PAGE </a>
+            </div>
+            @foreach (Order order in Model.Orders)
+            {
+                @foreach (Item item in JsonConvert.DeserializeObject<List<Item>>(order.items))
+                {
+                    <div class="bg-white row pt-3 pb-3 pr-3 mt-3">
+                        <div class="col-3">
+                            <img src="/img/@item.item_image" class="admin-index-img" alt="alt-text" />
+                        </div>
+                        <div class="admin-item-name col-4 admin-button-div">
+                            <div>
+                                <h6 class="grey-color"><b>Customer Name: </b> @item.seller_name </h6>
+                            </div>
+                            <div>
+                                <h6 class="grey-color"><b>Order Number: </b> @order.order_status </h6>
+                            </div>
+                            <div>
+                                <h6 class="grey-color"><b>Order Name: </b> @item.item_name </h6>
+                            </div>
+                            <div>
+                                <h6 class="grey-color"><b>Tracking Number: </b> @order.tracking_number </h6>
+                            </div>
+                        </div>
+                        <div class="col-5 text-right admin-button-div">
+                            <a asp-action="DeliveredItem" asp-controller="Admin" asp-route-id="@item.item_id" type="submit" class="btn btn-success color-white"><i class="fa fa-check"></i> DELIVERED</a>
+                            <a asp-action="CancelOrder" asp-controller="Admin"  asp-route-id="@item.item_id" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> CANCEL ORDER</a>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+

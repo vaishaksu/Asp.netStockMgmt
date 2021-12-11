@@ -1,0 +1,76 @@
+﻿@model StockManagement.Models.Customer
+
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row login-container bg-white pt-5">
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="col-md-4 ">
+        <form asp-action="Signup">
+            <h1 class="grey-color text-center">Signup</h1>
+            <span class="text-danger pb-5 pt-5">@ViewBag.error</span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="customer_name" class="control-label"></label>
+                <input asp-for="customer_name" class="form-control" />
+                <span asp-validation-for="customer_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" type="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="phone_number" class="control-label"></label>
+                <input asp-for="phone_number" class="form-control" />
+                <span asp-validation-for="phone_number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="address" class="control-label"></label>
+                <input asp-for="address" class="form-control" />
+                <span asp-validation-for="address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="username" class="control-label"></label>
+                <input asp-for="username" class="form-control" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" type="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="confirm_password" class="control-label"></label>
+                <input asp-for="confirm_password" type="password" class="form-control" />
+                <span asp-validation-for="confirm_password"  class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="user_id" class="control-label"></label>
+                <input asp-for="user_id" class="form-control" />
+                <span asp-validation-for="user_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="order_id" class="control-label"></label>
+                <input asp-for="order_id" class="form-control" />
+                <span asp-validation-for="order_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="item_id" class="control-label"></label>
+                <input asp-for="item_id" class="form-control" />
+                <span asp-validation-for="item_id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

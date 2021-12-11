@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+@using StockManagement.Models
+@model Customer
+
+@{
+    Customer customer_address = ViewBag.customerAddress;
+
+    bool useExistingAddress = true;
+}
+
+<div>
+
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="address-container mt-4 p-3">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>
+        @{
+            if (useExistingAddress)
+            {
+                <div class="pt-5 pb-5">
+                    <h5 class="grey-color text-center">VERIFY YOUR ADDRESS</h5>
+                    <div class="pt-3 pb-2">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                            <label class="custom-control-label" for="customSwitch1">Use Existing Address</label>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-3 pb-3">
+                        <p><span>@customer_address.address</span>  <a asp-action="address" asp-controller="Customer" class="btn btn-link" asp-route-id="@customer_address.customer_id"> <i class="fas fa-edit"></i> EDIT </a> </p>
+                    </div>
+                    <div class="pt-3 d-flex justify-content-between">
+                        <a asp-action="MyCart" asp-controller="Customer" type="submit" class="btn btn-primary">PREVIOUS</a>
+                        <a asp-action="OrderSummary" asp-controller="Customer" type="submit" class="btn btn-primary">CONTINUE</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1">Use Existing Address</label>
+                </div>
+
+                <div class="">
+                    <form asp-action="Address" method="post">
+                        <h5 class="grey-color text-center">EDIT ADDRESS</h5>
+                        <div class="mb-3 pt-3">
+                            <label for="Apt_number" class="form-label">Apartment or Door Number</label>
+                            <input type="text" class="form-control" name="customer_firstname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="street_name" class="form-label">Street Name</label>
+                            <input type="text" class="form-control" name="street_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" name="city">
+                        </div>
+                        <div class="mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" name="state">
+                        </div>
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" class="form-control" name="country">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pin_code" class="form-label">Pin Code</label>
+                            <input type="text" class="form-control" name="pin_code">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">CREATE ADDRESS</button>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</div>
+

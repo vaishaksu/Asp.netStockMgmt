@@ -1,0 +1,26 @@
+﻿body {
+}
+
+.admin-index-img {
+    height: 150px;
+    width: -webkit-fill-available;
+    object-fit: contain;
+}
+
+.admin-button-div {
+    vertical-align: middle;
+    margin: auto;
+}
+
+..btn-warning {
+    background-color: #e0a800 !important;
+    border-color: #d39e00 !important;
+}
+
+.color-white {
+    color: #fff;
+}
+
+.color-white:hover {
+    color: #fff;
+}

@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+@using StockManagement.Models
+@model Item
+
+@{ 
+    Item item = ViewBag.Item;
+}
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class="details-container pt-5">
+        <div class="details-container-wrapper row bg-white pt-3 pb-3 pr-3">
+            <div class="details-img-btns col-4">
+                <div class="">
+                    <img src="/img/@item.item_image" class="details-image" width="180" height="400" />
+                </div>
+                <div class="details-quantity">
+                    <div class="d-flex pt-3 text-center justify-content-center">
+                        @using (Html.BeginForm("DecrementClick", "Item"))
+                        {
+                            <button class="btn btn-light rounded-circle decrement-increment-btn" type="submit" name="decrement"> <b>-</b> </button>
+                        }
+
+                        <p class="quantity-p"> @ViewBag.quantity </p>
+                        @*<p class="quantity-p"> @item.quantity </p>*@
+
+                        @using (Html.BeginForm("IncrementClick", "Item"))
+                        {
+                            <button class="btn btn-light rounded-circle decrement-increment-btn" type="submit" name="increment"> <b>+</b> </button>
+                        }
+                    </div>
+                </div>
+                <div class="btns-list d-flex justify-content-between pt-3">
+                    <a asp-action="MyCart" asp-controller="Customer" type="submit" class="btn btn-success p-2" ><i class="fas fa-shopping-cart"></i><b> ADD TO CART</b>  </a>
+                    <a asp-action="MyCart" asp-controller="Customer" type="submit" class="btn btn-warning  p-2 color-white"><i class="fas fa-bolt"></i> <b>BUY NOW</b>  </a>
+                </div>
+            </div>
+            <div class="details-price-description col-8">
+                <div>
+                    <h5 class="details-name grey-color"> @item.item_name </h5>
+                </div>
+                <div>
+                    <h5 class="details-price green-color"> @item.price.ToString("c")</h5>
+                </div>
+                <div class="details-description">
+                   @item.item_description
+                </div>
+                <div class="details-tag">
+                    <p>Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C</p>
+                    <p><span><i class="fas fa-tags"></i></span>&nbsp;PriceExtra $270 off(price inclusive of discount)T&C</p>
+                    <p><span><i class="fas fa-tags"></i></span>&nbsp;Get Google Nest Mini at $1499T&C</p>
+                    <p><span><i class="fas fa-tags"></i></span>&nbsp;Get Lenovo Smart Clock Essential at $1999T&C</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

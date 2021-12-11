@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+@using StockManagement.Models
+@model List<Item>
+
+<div>
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    @foreach (Item item in ViewBag.Item)
+    {
+        <a asp-action="Details" asp-controller="Item" asp-route-id="@item.item_id" class="btn btn-light menu-container-a bg-white  mt-3 pl-3 pt-0 pb-3">
+            <div class="menu-container-wrapper d-flex justify-content-between mt-3">
+                <div class="menu-img-name d-flex row">
+                    <div class="menu-image col-2">
+                        <img src="/img/@item.item_image" width="180" height="200" />
+                    </div>
+                    <div class="menu-name-description col-6">
+                        <div class="menu-name">
+                            <h5 class="grey-color"> @item.item_name </h5>
+                        </div>
+                        <div class="menu-description">
+                            <span>
+                                @item.item_description
+                            </span>
+                        </div>
+                    </div>
+                <div class="menu-price col-4 text-right">
+                    <h4 class="grey-color"> @item.price.ToString("c") </h4>
+                </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

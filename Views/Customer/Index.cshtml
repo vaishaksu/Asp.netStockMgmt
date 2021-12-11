@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CustomerHeader.cshtml";
+}
+
+<div>
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/customerMenu.css" type="text/css" />
+    <div class=" mt-5">
+        <h3 class="top-popular-h3 grey-color bg-white row justify-content-center"> Top most popular items </h3>
+        <div class="item-wrapper row ">
+            @foreach (Item item in ViewBag.Items)
+            {
+                <div class="item-space-container col-2 bg-white mr-3 mb-3 pt-3">
+                    <a asp-action="Details" asp-controller="Item" asp-route-id="@item.item_id">
+                        <div class="item-image">
+                            <img class="item-immg" src="/img/@item.item_image" alt="image 1" width="150" height="150" />
+                        </div>
+                        <div class="item-name-price-container">
+                            <div class="item-name color-black">
+                                <b> @item.item_name </b>
+                            </div>
+                            <div class="item-price">
+                                <p class="green-color"><b>@item.price.ToString("c")</b></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+    @*<div class="d-flex mb-3">
+            @using (Html.BeginForm("IncrementClick", "Customer"))
+            {
+                <button class="btn btn-primary increment-btn" type="submit" name="increment"> + </button>
+            }
+            <p class="quantity-p"> @ViewBag.quantity </p>
+
+            @using (Html.BeginForm("DecrementClick", "Customer"))
+            {
+                <button class="btn btn-primary" type="submit" name="decrement"> - </button>
+            }
+        </div>*@
+
+    @*<div>
+            <input class="btn btn-warning" type="submit" value="Place Order" />
+        </div>*@
